@@ -7,7 +7,10 @@ use Hackathon\Game\Result;
 /**
  * Class PantoraPlayers
  * @package Hackathon\PlayerIA
- * @author YOUR NAME HERE
+ * @author Sara Chaieb
+ * Je me base principalement sur les moves de mes opponents.
+ * J'avais fais un algo qui se basait sur les moves de mes opponents ainsi que sur les miens aussi
+ * sauf que ça a causé ma chute et l'atterrissage a fait mal, du coup je suis restée dans la simplicité.
  */
 class PantoraPlayer extends Player
 {
