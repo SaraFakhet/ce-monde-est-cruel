@@ -17,30 +17,38 @@ class PantoraPlayer extends Player
 
     public function getChoice()
     {
-        $paper = 0;
-        $scissor = 0;
-        $rock = 0;
         if ($this->result->getNbRound() !== 0) {
-            $array = $this->result->getChoicesFor($this->opponentSide);
-            foreach ($array as $choice) {
-                if ($choice === 'paper') {
-                    $paper++;
-                } elseif ($choice === 'scissors') {
-                    $scissor++;
-                } else {
-                    $rock++;
-                }
-            }
-            $res = max($paper, $scissor, $rock);
-            switch ($res) {
-                case $paper:
-                    return parent::scissorsChoice();
+            $mytab = $this->result->getStatsFor($this->mySide);
+            $tabopponent = $this->result->getStatsFor($this->opponentSide);
+            $res_mine = max($mytab['scissors'], $mytab['paper'], $mytab['rock']);
+            $res_opponent = max($tabopponent['scissors'], $tabopponent['paper'], $tabopponent['rock']);
+            switch ($res_opponent) {
+                case $tabopponent['paper']:
+                    if ($res_mine === 'rock') {
+                        return parent::scissorsChoice();
+                    } elseif ($res_mine === 'paper') {
+                        return parent::rockChoice();
+                    } else {
+                        return parent::paperChoice();
+                    }
                     break;
-                case $rock:
-                    return parent::paperChoice();
+                case $tabopponent['rock']:
+                    if ($res_mine === 'paper') {
+                        return parent::rockChoice();
+                    } elseif ($res_mine === 'rock') {
+                        return parent::scissorsChoice();
+                    } else {
+                        return parent::paperChoice();
+                    }
                     break;
-                case $scissor:
-                    return parent::rockChoice();
+                case $tabopponent['scissors']:
+                    if ($res_mine === 'paper') {
+                        return parent::rockChoice();
+                    } elseif ($res_mine === 'rock') {
+                        return parent::scissorsChoice();
+                    } else {
+                        return parent::paperChoice();
+                    }
                     break;
                 default:
                     break;
