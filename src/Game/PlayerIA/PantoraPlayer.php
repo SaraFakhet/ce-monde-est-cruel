@@ -24,31 +24,13 @@ class PantoraPlayer extends Player
             $res_opponent = max($tabopponent['scissors'], $tabopponent['paper'], $tabopponent['rock']);
             switch ($res_opponent) {
                 case $tabopponent['paper']:
-                    if ($res_mine === 'rock') {
-                        return parent::scissorsChoice();
-                    } elseif ($res_mine === 'paper') {
-                        return parent::rockChoice();
-                    } else {
-                        return parent::paperChoice();
-                    }
+                    return parent::scissorsChoice();
                     break;
                 case $tabopponent['rock']:
-                    if ($res_mine === 'paper') {
-                        return parent::rockChoice();
-                    } elseif ($res_mine === 'rock') {
-                        return parent::scissorsChoice();
-                    } else {
-                        return parent::paperChoice();
-                    }
+                    return parent::paperChoice();
                     break;
                 case $tabopponent['scissors']:
-                    if ($res_mine === 'paper') {
-                        return parent::rockChoice();
-                    } elseif ($res_mine === 'rock') {
-                        return parent::scissorsChoice();
-                    } else {
-                        return parent::paperChoice();
-                    }
+                    return parent::rockChoice();
                     break;
                 default:
                     break;
