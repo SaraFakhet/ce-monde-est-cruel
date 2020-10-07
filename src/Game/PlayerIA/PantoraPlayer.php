@@ -42,7 +42,7 @@ class PantoraPlayer extends Player
         // -------------------------------------    -----------------------------------------------------
 
 
-        return parent::rockChoice();
+        return parent::scissorsChoice();
 
     }
 };
