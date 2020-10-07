@@ -17,6 +17,38 @@ class PantoraPlayer extends Player
 
     public function getChoice()
     {
+        $paper = 0;
+        $scissor = 0;
+        $rock = 0;
+        if ($this->result->getNbRound() !== 0) {
+            $array = $this->result->getChoicesFor($this->opponentSide);
+            foreach ($array as $choice) {
+                if ($choice === 'paper') {
+                    $paper++;
+                } elseif ($choice === 'scissors') {
+                    $scissor++;
+                } else {
+                    $rock++;
+                }
+            }
+            $res = max($paper, $scissor, $rock);
+            switch ($res) {
+                case $paper:
+                    return parent::scissorsChoice();
+                    break;
+                case $rock:
+                    return parent::paperChoice();
+                    break;
+                case $scissor:
+                    return parent::rockChoice();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return parent::rockChoice();
+
         // -------------------------------------    -----------------------------------------------------
         // How to get my Last Choice           ?    $this->result->getLastChoiceFor($this->mySide) -- if 0 (first round)
         // How to get the opponent Last Choice ?    $this->result->getLastChoiceFor($this->opponentSide) -- if 0 (first round)
@@ -40,9 +72,5 @@ class PantoraPlayer extends Player
         // -------------------------------------    -----------------------------------------------------
         // How can i display the result of each round ? $this->prettyDisplay()
         // -------------------------------------    -----------------------------------------------------
-
-
-        return parent::scissorsChoice();
-
     }
 };
